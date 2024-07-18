@@ -8,8 +8,18 @@ pipeline {
 
     stages {
          stage('Build') {
+            withMaven(maven : 'maven') {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
