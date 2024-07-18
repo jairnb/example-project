@@ -1,10 +1,15 @@
 pipeline {
     agent any
 
+    environment {
+        NAME = 'Jenkins'
+        LASTNAME = 'Application'
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'echo $NAME $LASTNAME'
             }
         }
         stage('Test') {
