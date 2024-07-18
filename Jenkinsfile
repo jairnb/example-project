@@ -7,19 +7,30 @@ pipeline {
     }
 
     stages {
-         stage('Build') {
-            withMaven(maven : 'maven') {
-                sh 'mvn clean install'
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'maven') {
+                    sh 'mvn clean install'
+                }
             }
         }
-        stage('Test') {
+
+        stage ('Testing Stage') {
+
             steps {
-                echo 'Testing..'
+                withMaven(maven : 'maven') {
+                    sh 'mvn test'
+                }
             }
         }
-        stage('Deploy') {
+
+
+        stage ('Deployment Stage') {
             steps {
-                echo 'Deploying....'
+                withMaven(maven : 'maven') {
+                    sh 'mvn deploy'
+                }
             }
         }
     }
